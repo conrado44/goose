@@ -1,7 +1,7 @@
 import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../ui/popover';
 import React, { useEffect, useState } from 'react';
 import { ChatSmart, Idea, Refresh, Time, Send, Settings } from '../icons';
-import { FolderOpen, Moon, Sliders, Sun, Save, FileText } from 'lucide-react';
+import { FolderOpen, Moon, Sliders, Sun, Save, FileText, CreditCard } from 'lucide-react';
 import { useConfig } from '../ConfigContext';
 import { ViewOptions, View } from '../../App';
 import { saveRecipe, generateRecipeFilename } from '../../recipe/recipeStorage';
@@ -298,6 +298,17 @@ export default function MoreMenu({
                 icon={<Time className="w-4 h-4" />}
               >
                 Scheduler
+              </MenuButton>
+
+              <MenuButton
+                onClick={() => {
+                  setOpen(false);
+                  setView('square');
+                }}
+                subtitle="Manage Square payment cards"
+                icon={<CreditCard className="w-4 h-4" />}
+              >
+                Square Integration
               </MenuButton>
 
               <MenuButton

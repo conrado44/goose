@@ -1926,6 +1926,35 @@ app.whenReady().then(async () => {
   ipcMain.on('get-app-version', (event) => {
     event.returnValue = app.getVersion();
   });
+
+  // Handler for Square MCP integration
+  ipcMain.handle('invoke-square-mcp', async (_event, service: string, method: string, request: unknown) => {
+    try {
+      // This would typically make a request to the Square MCP server
+      // For now, we'll simulate the API call
+      console.log(`Square MCP call: ${service}.${method}`, request);
+      
+      // In a real implementation, this would:
+      // 1. Connect to the Square MCP server
+      // 2. Make the API call with the provided parameters
+      // 3. Return the response
+      
+      // For now, return a mock response to indicate the integration point is ready
+      return {
+        ok: false,
+        error: 'Square MCP integration not yet fully implemented. This is the integration point where the actual Square API call would be made.',
+        service,
+        method,
+        request
+      };
+    } catch (error) {
+      console.error('Error in Square MCP call:', error);
+      return {
+        ok: false,
+        error: error instanceof Error ? error.message : 'Unknown error in Square MCP call'
+      };
+    }
+  });
 });
 
 /**

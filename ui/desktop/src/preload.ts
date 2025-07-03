@@ -106,6 +106,8 @@ type ElectronAPI = {
   restartApp: () => void;
   onUpdaterEvent: (callback: (event: UpdaterEvent) => void) => void;
   getUpdateState: () => Promise<{ updateAvailable: boolean; latestVersion?: string } | null>;
+  // Square MCP integration
+  invokeSquareMCP: (service: string, method: string, request: unknown) => Promise<unknown>;
 };
 
 type AppConfigAPI = {
@@ -208,6 +210,9 @@ const electronAPI: ElectronAPI = {
   },
   getUpdateState: (): Promise<{ updateAvailable: boolean; latestVersion?: string } | null> => {
     return ipcRenderer.invoke('get-update-state');
+  },
+  invokeSquareMCP: (service: string, method: string, request: unknown): Promise<unknown> => {
+    return ipcRenderer.invoke('invoke-square-mcp', service, method, request);
   },
 };
 

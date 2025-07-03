@@ -29,6 +29,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useConfig, MalformedConfigError } from './components/ConfigContext';
 import { ModelAndProviderProvider } from './components/ModelAndProviderContext';
 import { addExtensionFromDeepLink as addExtensionFromDeepLinkV2 } from './components/settings/extensions';
+import { SquareIntegration } from './components/square';
 import {
   backupConfig,
   initConfig,
@@ -55,7 +56,8 @@ export type View =
   | 'loading'
   | 'recipeEditor'
   | 'recipes'
-  | 'permission';
+  | 'permission'
+  | 'square';
 
 export type ViewOptions = {
   // Settings view options
@@ -601,6 +603,11 @@ export default function App() {
           {view === 'permission' && (
             <PermissionSettingsView
               onClose={() => setView((viewOptions as { parentView: View }).parentView)}
+            />
+          )}
+          {view === 'square' && (
+            <SquareIntegration
+              onClose={() => setView('chat')}
             />
           )}
         </div>
